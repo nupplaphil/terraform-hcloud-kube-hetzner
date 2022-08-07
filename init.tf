@@ -162,7 +162,7 @@ resource "null_resource" "kustomization" {
     content = templatefile(
       "${path.module}/templates/cilium.yaml.tpl",
       {
-        values = indent(4, trimspace(fileexists("cilium_values.yaml") ? file("cilium_values.yaml") : local.default_cilium_values))
+        values = indent(4, trimspace(var.cilium_values))
     })
     destination = "/var/post_install/cilium.yaml"
   }
@@ -191,7 +191,9 @@ resource "null_resource" "kustomization" {
   provisioner "file" {
     content = templatefile(
       "${path.module}/templates/cert_manager.yaml.tpl",
-    {})
+    {
+      values = indent(4, trimspace(var.cert_manager_values))
+    })
     destination = "/var/post_install/cert_manager.yaml"
   }
 

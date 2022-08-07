@@ -279,3 +279,23 @@ variable "extra_packages_to_install" {
   default     = []
   description = "A list of additional packages to install on nodes"
 }
+
+variable "cert_manager_values" {
+  type        = string
+  default     = <<EOT
+installCRDs: true
+EOT
+  description = "The YAML config string for cert-manager"
+}
+
+variable "cilium_values" {
+  type        = string
+  default     = <<EOT
+ipam:
+ operator:
+  clusterPoolIPv4PodCIDRList:
+   - "10.42.0.0/16"
+devices: "eth1"
+EOT
+  description = "The YAML config string for cilium"
+}

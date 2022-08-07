@@ -266,13 +266,5 @@ locals {
       flannel-backend        = "none"
     }
   }
-
-  default_cilium_values = <<EOT
-ipam:
- operator:
-  clusterPoolIPv4PodCIDRList:
-   - ${local.cluster_cidr_ipv4}
-devices: "eth1"
-EOT
 }
 
